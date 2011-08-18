@@ -1,6 +1,4 @@
 require "sequel"
-require "csv"
-require "net/http/persistent"
 require "ft"
 
 module Sequel
