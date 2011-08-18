@@ -1,7 +1,8 @@
 Fusion Tables adapter for Sequel
 ================================
 
-Experimental adapter to use Fusion Tables in [Sequel](http://sequel.rubyforge.org).
+Experimental adapter to use [Fusion Tables](http://www.google.com/fusiontables/public/tour/index.html)
+in [Sequel](http://sequel.rubyforge.org).
 
 Usage
 -----
@@ -21,6 +22,10 @@ Usage
     # {"Country"=>"CHINA", "Name"=>"LINGAO"}
     # ...
 
+Installation
+------------
+
+    $ gem install sequel-fusiontables
 
 Known issues
 ------------
