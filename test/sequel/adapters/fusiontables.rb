@@ -1,5 +1,7 @@
 require "cutest"
-require "./lib/sequel/adapters/fusion_tables"
+require "sequel"
+
+$LOAD_PATH.unshift(File.expand_path("../../../lib", File.dirname(__FILE__)))
 
 setup do
   Sequel.connect("fusiontables:///")[1310767]
