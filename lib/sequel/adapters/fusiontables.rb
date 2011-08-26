@@ -10,8 +10,16 @@ module Sequel
         FusionTables::Dataset.new(self, opts)
       end
 
-      def execute(sql, opts={}, &block)
+      def execute(sql, opts = {}, &block)
         _execute(:select, sql, opts, &block)
+      end
+
+      def execute_insert(sql, opts = {})
+        _execute(:insert, sql, opts)
+      end
+
+      def execute_dui(sql, opts = {})
+        _execute(:update, sql, opts)
       end
 
       def self.uri_to_options(uri)
@@ -20,6 +28,10 @@ module Sequel
 
       def connect(server)
         ::FusionTables::Connection.new
+      end
+
+      def identifier_input_method_default
+        nil
       end
 
     protected
@@ -32,6 +44,11 @@ module Sequel
             case type
             when :select
               log_yield(sql, log_args) { yield(conn.query(sql)) }
+            when :insert
+              result = log_yield(sql, log_args) { conn.query(sql) }
+              result[1][0]
+            when :update
+              result = log_yield(sql, log_args) { conn.query(sql) }
             end
           end
         rescue ::FusionTables::Error => e
@@ -50,6 +67,14 @@ module Sequel
         else
           super
         end
+      end
+
+      def quoted_identifier(name)
+        ::FusionTables::Connection.quote(name)
+      end
+
+      def literal_string(string)
+        ::FusionTables::Connection.quote(string)
       end
 
       def fetch_rows(sql)

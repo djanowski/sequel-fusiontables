@@ -34,3 +34,9 @@ test "Fusion Tables errors" do |db|
     db.select("Foo").all
   end
 end
+
+test "non-SELECT raises errors" do |db|
+  assert_raise(Sequel::DatabaseError) do
+    db.insert(foo: "bar")
+  end
+end
