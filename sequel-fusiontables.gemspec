@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.email             = ["djanowski@dimaion.com"]
   s.homepage          = "http://github.com/djanowski/sequel-fusiontables"
 
-  s.add_dependency("ft")
+  s.add_dependency("ft", ">= 0.0.2")
   s.add_dependency("sequel")
 
   s.files = Dir[
