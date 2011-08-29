@@ -54,3 +54,11 @@ test "authentication" do
   assert_equal $credentials[:email], "foo@bar.com"
   assert_equal $credentials[:password], "p4wned"
 end
+
+test "CREATE TABLE" do |db, queries|
+  conn = Sequel.connect("fusiontables:///")
+
+  conn << "CREATE TABLE foo"
+
+  assert queries.include?("CREATE TABLE foo")
+end
