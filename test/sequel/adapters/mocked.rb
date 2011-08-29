@@ -6,6 +6,10 @@ $LOAD_PATH.unshift(File.expand_path("../../../lib", File.dirname(__FILE__)))
 require "ft"
 
 class FusionTables::Connection
+  def authenticate(email, password)
+    $credentials = {:email => email, :password => password}
+  end
+
   def query(sql)
     $queries << sql
     [["rowid"], [$queries.size]]
@@ -42,4 +46,11 @@ test "DELETE" do |db, queries|
   db.filter(rowid: "1").delete
 
   assert_equal queries.last, "DELETE FROM 1310767 WHERE 'rowid' = '1'"
+end
+
+test "authentication" do
+  Sequel.connect("fusiontables://foo%40bar.com:p4wned@fusiontables")[1310767].all
+
+  assert_equal $credentials[:email], "foo@bar.com"
+  assert_equal $credentials[:password], "p4wned"
 end

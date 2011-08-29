@@ -23,11 +23,17 @@ module Sequel
       end
 
       def self.uri_to_options(uri)
-        {:database => uri.registry}
+        {:email => uri.user, :password => uri.password}
       end
 
       def connect(server)
-        ::FusionTables::Connection.new
+        connection = ::FusionTables::Connection.new
+
+        if opts[:email]
+          connection.authenticate(opts[:email], opts[:password])
+        end
+
+        connection
       end
 
       def identifier_input_method_default
