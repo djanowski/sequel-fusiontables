@@ -1,0 +1,18 @@
+2011-08-29 - 0.0.3
+
+* Added support for authentication.
+
+  Specify your Google account email and password in the connection
+  string:
+
+    db = Sequel.connect("fusiontables://user%40gmail.com:password@fusiontables")
+
+* Added support for INSERT, UPDATE and DELETE.
+
+2011-08-18 - 0.0.2
+
+* Minor bug fixes.
+
+2011-08-18 - 0.0.1
+
+* Initial release supporting basic SELECTs.
